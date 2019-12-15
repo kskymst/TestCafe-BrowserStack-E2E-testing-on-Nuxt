@@ -28,6 +28,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "json-server": "^0.15.1",
     "prettier": "^1.16.4",
-    "testcafe": "^1.7.0"
+    "testcafe": "^1.7.0",
+    "testcafe-browser-provider-browserstack": "^1.10.1"
   }
 }
