@@ -26,7 +26,7 @@ export default {
   }),
   methods: {
     async login() {
-      const users = await this.$axios.$get('http://localhost:8080/user')
+      const users = await this.$axios.$get('http://localhost:8000/user')
       const isCorrect = users.some(
         (user) => user.name === this.name && user.password === this.password
       )

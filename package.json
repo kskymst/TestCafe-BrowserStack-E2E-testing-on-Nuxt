@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "server": "json-server --watch db/db.json --port 8080",
+    "server": "json-server --watch db/db.json --port 8000",
     "test:e2e": "testcafe browserstack:ie@11.0:Windows 10 test/e2e/*.js --speed 0.8"
   },
   "dependencies": {
