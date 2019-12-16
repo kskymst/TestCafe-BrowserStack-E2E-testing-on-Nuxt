@@ -1,6 +1,19 @@
-import { Selector } from 'testcafe'
+import { Selector, RequestMock } from 'testcafe'
 
-fixture('タスクの作成').page('http://localhost:3000/login')
+const resData = [
+  {
+    name: 'test',
+    password: '1234'
+  }
+]
+
+const mock = RequestMock()
+  .onRequestTo('http://localhost:8000/user')
+  .respond(resData, 200, { 'Access-Control-Allow-Origin': '*' })
+
+fixture('ログイン')
+  .page('http://localhost:3000/login')
+  .requestHooks(mock)
 
 test('正しいログイン情報を入力後、mypageにuserNameが表示されること', async (t) => {
   const nameInput = await Selector('.name')
@@ -8,14 +21,13 @@ test('正しいログイン情報を入力後、mypageにuserNameが表示され
   const loginButton = await Selector('button')
 
   await t
-    .setNativeDialogHandler(() => true)
-    .typeText(nameInput, 'testuser')
-    .typeText(passwordInput, 'password')
+    .typeText(nameInput, 'test')
+    .typeText(passwordInput, '1234')
     .click(loginButton)
 
   const loginUserName = await Selector('.user-name').textContent
 
-  await t.expect(loginUserName).eql('testuser')
+  await t.expect(loginUserName).eql('test')
 })
 
 test('誤ったログイン情報を入力後、エラーメッセージが表示されること', async (t) => {
@@ -24,7 +36,6 @@ test('誤ったログイン情報を入力後、エラーメッセージが表�
   const loginButton = await Selector('button')
 
   await t
-    .setNativeDialogHandler(() => true)
     .typeText(nameInput, 'sample')
     .typeText(passwordInput, 'xxxx')
     .click(loginButton)
