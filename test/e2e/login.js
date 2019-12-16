@@ -11,6 +11,7 @@ const mock = RequestMock()
   .onRequestTo('http://localhost:8000/user')
   .respond(resData, 200, { 'Access-Control-Allow-Origin': '*' })
 
+// eslint-disable-next-line
 fixture('ログイン')
   .page('http://localhost:3000/login')
   .requestHooks(mock)
