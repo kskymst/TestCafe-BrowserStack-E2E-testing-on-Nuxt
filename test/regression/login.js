@@ -35,7 +35,8 @@ const compareScreenshot = async () => {
           ),
           data.getBuffer()
         )
-        console.log('😿 Detected visual differences 😿') // eslint-disable-line
+
+        throw new Error('😿 Detected visual differences 😿')
       } else {
         console.log('🎉 There is no visual difference! 🎉') // eslint-disable-line
       }
