@@ -3,6 +3,8 @@ import { Selector } from 'testcafe'
 import resemble from 'resemblejs'
 import fs from 'fs-extra'
 
+const root = path.join(__dirname, '../../')
+
 // eslint-disable-next-line
 fixture('login')
   .page('http://localhost:3000/login') 
@@ -14,31 +16,32 @@ test('スクリーンショットを撮影', async (t) => {
     .typeText(nameInput, 'test')
     .typeText(passwordInput, '1234')
     .takeScreenshot({
-      path: 'test.png',
+      path: '/login/actual.png',
       fullPage: true
     })
   await compareScreenshot()
 })
 
+const saveDiff = (imagePath, data) => {
+  fs.writeFileSync(
+    path.join(path.dirname(imagePath), 'diff.png'),
+    data.getBuffer()
+  )
+}
+
 const compareScreenshot = async () => {
-  const baseDir = path.join(__dirname, '../../', '/screenshots/anzai_1.jpeg')
-  const compareDir = path.join(__dirname, '../../', '/screenshots/anzai_2.jpeg')
+  const actualImagePath = `${root}/screenshots/login/actual.png`
+  const expectedImagePath = `${root}/screenshots/login/expected.png`
 
-  await resemble(baseDir)
-    .compareTo(compareDir)
+  await resemble(actualImagePath)
+    .compareTo(expectedImagePath)
     .onComplete((data) => {
-      if (data.rawMisMatchPercentage > 0) {
-        fs.writeFileSync(
-          path.join(
-            path.dirname(baseDir),
-            `${path.basename(baseDir, path.extname(baseDir))}-diff.png`
-          ),
-          data.getBuffer()
-        )
-
-        throw new Error('😿 Detected visual differences 😿')
-      } else {
+      saveDiff(actualImagePath, data)
+      if (data.rawMisMatchPercentage === 0) {
+        fs.writeFileSync(expectedImagePath, data.getBuffer())
         console.log('🎉 There is no visual difference! 🎉') // eslint-disable-line
+      } else {
+        throw new Error('😿 Detected visual differences 😿')
       }
     })
 }
