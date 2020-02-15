@@ -10,16 +10,18 @@ fixture('login')
   .page('http://localhost:3000/login') 
 
 test('スクリーンショットを撮影', async (t) => {
+  const browser = t.browser.name.split(' ')[0].toLowerCase()
+
   const nameInput = await Selector('.name')
   const passwordInput = await Selector('.password')
   await t
     .typeText(nameInput, 'test')
     .typeText(passwordInput, '1234')
     .takeScreenshot({
-      path: '/login/actual.png',
-      fullPage: true
+      path: `/login/${browser}/actual.png`,
+      fullPage: browser !== 'safari' // safari is not supported fullPage property
     })
-  await compareScreenshot()
+  await compareScreenshot(browser)
 })
 
 const saveDiff = (imagePath, data) => {
@@ -29,9 +31,9 @@ const saveDiff = (imagePath, data) => {
   )
 }
 
-const compareScreenshot = async () => {
-  const actualImagePath = `${root}/screenshots/login/actual.png`
-  const expectedImagePath = `${root}/screenshots/login/expected.png`
+const compareScreenshot = async (browser) => {
+  const actualImagePath = `${root}/screenshots/login/${browser}/actual.png`
+  const expectedImagePath = `${root}/screenshots/login/${browser}/expected.png`
 
   await resemble(actualImagePath)
     .compareTo(expectedImagePath)
@@ -39,9 +41,9 @@ const compareScreenshot = async () => {
       saveDiff(actualImagePath, data)
       if (data.rawMisMatchPercentage === 0) {
         fs.writeFileSync(expectedImagePath, data.getBuffer())
-        console.log('🎉 There is no visual difference! 🎉') // eslint-disable-line
+        console.log(`🎉 ${browser} is no visual difference! 🎉`) // eslint-disable-line
       } else {
-        throw new Error('😿 Detected visual differences 😿')
+        throw new Error(`😿 ${browser} Detected visual differences 😿`)
       }
     })
 }
