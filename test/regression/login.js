@@ -35,8 +35,16 @@ const compareScreenshot = async (browser) => {
   const actualImagePath = `${root}/screenshots/login/${browser}/actual.png`
   const expectedImagePath = `${root}/screenshots/login/${browser}/expected.png`
 
+  // 初回はdiffを作らず、expectedを生成して終了
+  if (!fs.existsSync(expectedImagePath)) {
+    fs.copyFileSync(actualImagePath, expectedImagePath)
+    console.log(`👨‍💻 First ${browser} testing 👨‍💻`) // eslint-disable-line
+    return
+  }
+
   await resemble(actualImagePath)
     .compareTo(expectedImagePath)
+    .scaleToSameSize()
     .onComplete((data) => {
       saveDiff(actualImagePath, data)
       if (data.rawMisMatchPercentage === 0) {
