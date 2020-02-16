@@ -2,6 +2,7 @@ import path from 'path'
 import { Selector } from 'testcafe'
 import resemble from 'resemblejs'
 import fs from 'fs-extra'
+import open from 'open'
 
 const root = path.join(__dirname, '../../')
 
@@ -53,5 +54,6 @@ const compareScreenshot = async (browser) => {
       } else {
         throw new Error(`😿 ${browser} Detected visual differences 😿`)
       }
+      open(`${root}/screenshots/result.html`)
     })
 }
