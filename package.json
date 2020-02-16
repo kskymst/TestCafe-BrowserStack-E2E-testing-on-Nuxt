@@ -12,7 +12,9 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "server": "json-server --watch db/db.json --port 8000",
     "test:e2e": "testcafe browserstack:ie@11.0:Windows 10 test/e2e/*.js --hostname localhost --speed 0.8",
-    "test:regression": "testcafe chrome:headless,firefox:headless,safari test/regression/*.js --hostname localhost"
+    "test:regression": "yarn run regression && yarn run open",
+    "regression": "testcafe chrome:headless,firefox:headless,safari test/regression/*.js --hostname localhost",
+    "open": "opener screenshots/result.html"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -29,7 +31,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "fs-extra": "^8.1.0",
     "json-server": "^0.15.1",
-    "open": "^7.0.2",
+    "opener": "^1.5.1",
     "path": "^0.12.7",
     "prettier": "^1.16.4",
     "resemblejs": "^3.2.3",

@@ -2,7 +2,6 @@ import path from 'path'
 import { Selector } from 'testcafe'
 import resemble from 'resemblejs'
 import fs from 'fs-extra'
-import open from 'open'
 
 const root = path.join(__dirname, '../../')
 
@@ -52,8 +51,7 @@ const compareScreenshot = async (browser) => {
         fs.writeFileSync(expectedImagePath, data.getBuffer())
         console.log(`🎉 ${browser} is no visual difference! 🎉`) // eslint-disable-line
       } else {
-        throw new Error(`😿 ${browser} Detected visual differences 😿`)
+        console.log(`😿 ${browser} Detected visual differences 😿`) // eslint-disable-line
       }
-      open(`${root}/screenshots/result.html`)
     })
 }
