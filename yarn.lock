@@ -4067,6 +4067,7 @@ defu@^0.0.3:
 del@3.0.0, del@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/del/-/del-3.0.0.tgz#53ecf699ffcbcb39637691ab13baf160819766e5"
+  integrity sha1-U+z2mf/LyzljdpGrE7rxYIGXZuU=
   dependencies:
     globby "^6.1.0"
     is-path-cwd "^1.0.0"
@@ -8928,11 +8929,6 @@ reg-cli@^0.15.13:
     mustache "3.1.0"
     x-img-diff-js "0.3.5"
 
-reg-simple-keygen-plugin@^0.7.25:
-  version "0.7.25"
-  resolved "https://registry.yarnpkg.com/reg-simple-keygen-plugin/-/reg-simple-keygen-plugin-0.7.25.tgz#98e6b87216b4b25cf285156b8c2563957d9f17ac"
-  integrity sha512-+HATT5cFHOM+wFPKTWHtMvegGcCZ4NDbF+HOjjvIbzDNlVwByiAvxGUNfNJDoHAonLminxpn3R4fG1pKUEWuEQ==
-
 reg-suit-core@^0.8.6:
   version "0.8.6"
   resolved "https://registry.yarnpkg.com/reg-suit-core/-/reg-suit-core-0.8.6.tgz#8f44d504da2483d8b9fc623f9d86963b631758a5"
@@ -8956,7 +8952,7 @@ reg-suit-util@^0.8.5:
     mime-types "^2.1.15"
     mkdirp "^0.5.1"
 
-reg-suit@^0.10.0:
+reg-suit@^0.10.1:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/reg-suit/-/reg-suit-0.10.0.tgz#9ff86f96ed0a1b661ae931adb6e537150c3e9701"
   integrity sha512-Fum+moxCbv1+z8puUxhInLrEdRaFFl1JFmMOHU/6+MZqzJsWAcrRsrUIVipR/SDouRNJ6JVFWlJ/sUAoNr5Dfg==

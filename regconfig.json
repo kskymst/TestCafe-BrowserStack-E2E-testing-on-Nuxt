@@ -3,12 +3,9 @@
     "workingDir": ".reg",
     "actualDir": "screenshots",
     "thresholdRate": 0,
-    "addIgnore": true,
     "ximgdiff": {
-      "invocationType": "client"
+      "invocationType": "none"
     }
   },
-  "plugins": {
-    "reg-simple-keygen-plugin": true
-  }
+  "plugins": {}
 }
